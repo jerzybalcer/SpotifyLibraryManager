@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="SpotifyLibraryManager.AlbumCoverButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SpotifyLibraryManager"
+             mc:Ignorable="d" 
+             d:DesignHeight="230" d:DesignWidth="210" PreviewMouseLeftButtonDown="UserControl_PreviewMouseLeftButtonDown">
+
+    <Button Width="210" Height="230" Margin="7,0,7,15" x:Name="AlbumBtn" Style="{StaticResource AlbumCoverButtonStyle}" 
+            Command="{Binding SelectAlbumCommand}" CommandParameter="{Binding ElementName=Stack, Path=DataContext}" 
+            DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Grid}}, Path=DataContext}">
+        
+        <StackPanel x:Name="Stack" DataContext="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext}">
+            <Image Source="{Binding Album.Images[0].Url}" x:Name="Cover" Width="180" Height="180" Margin="0,2,0,0"/>
+            <TextBlock Text="{Binding Album.Name}" x:Name="Title" FontSize="14" FontWeight="Medium" Foreground="White" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="2,2,2,1" TextTrimming="CharacterEllipsis"/>
+            <TextBlock Text="{Binding Album.Artists[0].Name}" x:Name="Artist" FontSize="12" Foreground="#a3a3a3" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="2,0,2,2" TextTrimming="CharacterEllipsis"/>
+        </StackPanel>
+    </Button>
+</UserControl>
