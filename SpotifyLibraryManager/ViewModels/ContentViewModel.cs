@@ -12,13 +12,13 @@ namespace SpotifyLibraryManager.ViewModels
     public class ContentViewModel : INotifyPropertyChanged
     {
         public static ObservableCollection<SavedAlbum> VisibleAlbums { get; set; } = Albums.AvailableAlbums;
+        public ObservableCollection<SimpleTrack> SelectedTracks { get; set; } = new ObservableCollection<SimpleTrack>();
 
         private string _selectedTitle;
         private string _selectedArtist;
         private string _selectedReleaseDate;
         private string _selectedAddedAt;
         private string _selectedTotalTracks;
-        public ObservableCollection<SimpleTrack> SelectedTracks { get; set; } = new ObservableCollection<SimpleTrack>();
         public string SelectedTitle
         {
             get { return _selectedTitle; }
