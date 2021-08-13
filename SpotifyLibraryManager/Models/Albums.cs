@@ -111,6 +111,7 @@ namespace SpotifyLibraryManager.Models
                     item.Album.Artists.Any(artist => artist.Name.ToLower().Contains(searchingFor.ToLower())))
                     AvailableAlbums.Add(item);
             }
+            Sort(SortBy);
         }
         public static void ClearOnLogout()
         {

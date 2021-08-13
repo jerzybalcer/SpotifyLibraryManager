@@ -24,13 +24,13 @@
         <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Center" x:Name="SortStackPanel">
             <Menu x:Name="SortMenu" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                   VerticalAlignment="Center" Margin="0,0,0,0" IsEnabled="{Binding AreMenusEnabled}">
-                <MenuItem Header="Sort by" Margin="5,0,5,0" VerticalContentAlignment="Center" VerticalAlignment="Center" Height="22">
-                    <MenuItem Header="Name" x:Name="SortByName" Margin="5,0,5,0" Command="{Binding SortCommand}" CommandParameter="{Binding ElementName=SortByName, Path=Header}"/>
-                    <MenuItem Header="Artist" x:Name="SortByArtist" Margin="5,0,5,0" Command="{Binding SortCommand}" CommandParameter="{Binding ElementName=SortByArtist, Path=Header}"/>
-                    <MenuItem Header="Release Date" x:Name="SortByReleaseDate" Margin="5,0,5,0" Command="{Binding SortCommand}" CommandParameter="{Binding ElementName=SortByReleaseDate, Path=Header}"/>
-                    <MenuItem Header="Added At" x:Name="SortByAddedAt" Margin="5,0,5,0" Command="{Binding SortCommand}" CommandParameter="{Binding ElementName=SortByAddedAt, Path=Header}"/>
-                    <MenuItem Header="Total Tracks" x:Name="SortByTotalTracks" Margin="5,0,5,0" Command="{Binding SortCommand}" CommandParameter="{Binding ElementName=SortByTotalTracks, Path=Header}"/>
-                    <MenuItem Header="Popularity" x:Name="SortByPopularity" Margin="5,0,5,0" Command="{Binding SortCommand}" CommandParameter="{Binding ElementName=SortByPopularity, Path=Header}"/>
+                <MenuItem Header="Sort By" Foreground="White" Margin="5,0,5,0" VerticalContentAlignment="Center" VerticalAlignment="Center" Height="22" x:Name="SortTopItem">
+                    <MenuItem Header="Name" x:Name="SortByName" Margin="5,0,5,0" Command="{Binding SortCommand}" CommandParameter="{Binding ElementName=SortByName, Path=Header}" IsCheckable="True" Checked="Sort_Checked"/>
+                    <MenuItem Header="Artist" x:Name="SortByArtist" Margin="5,0,5,0" Command="{Binding SortCommand}" CommandParameter="{Binding ElementName=SortByArtist, Path=Header}" IsCheckable="True" Checked="Sort_Checked"/>
+                    <MenuItem Header="Release Date" x:Name="SortByReleaseDate" Margin="5,0,5,0" Command="{Binding SortCommand}" CommandParameter="{Binding ElementName=SortByReleaseDate, Path=Header}" IsCheckable="True" Checked="Sort_Checked"/>
+                    <MenuItem Header="Added At" x:Name="SortByAddedAt" Margin="5,0,5,0" Command="{Binding SortCommand}" CommandParameter="{Binding ElementName=SortByAddedAt, Path=Header}" IsChecked="True" IsCheckable="True" Checked="Sort_Checked"/>
+                    <MenuItem Header="Total Tracks" x:Name="SortByTotalTracks" Margin="5,0,5,0" Command="{Binding SortCommand}" CommandParameter="{Binding ElementName=SortByTotalTracks, Path=Header}" IsCheckable="True" Checked="Sort_Checked"/>
+                    <MenuItem Header="Popularity" x:Name="SortByPopularity" Margin="5,0,5,0" Command="{Binding SortCommand}" CommandParameter="{Binding ElementName=SortByPopularity, Path=Header}" IsCheckable="True" Checked="Sort_Checked"/>
                 </MenuItem>
             </Menu>
             <Button Style="{StaticResource ToolBarButtonStyle}"  Background="#383838" Foreground="White" Width="18" Height="18" 
@@ -55,7 +55,8 @@
         <!--User Menu-->
         <Menu x:Name="Menu" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" Grid.Column="3" 
               IsEnabled="{Binding AreMenusEnabled}">
-            <MenuItem Header="{Binding User.DisplayName}" Margin="5,0,5,0" x:Name="MenuUser" VerticalAlignment="Center" VerticalContentAlignment="Center" Height="22">
+            <MenuItem Header="{Binding User.DisplayName}" Margin="5,0,5,0" x:Name="MenuUser" VerticalAlignment="Center" 
+                      VerticalContentAlignment="Center" Height="22" Foreground="White">
                 <MenuItem Header="Logout" x:Name="MenuLogout" Margin="5,0,5,0" Command="{Binding LogoutCommand}" Click="MenuLogout_Click"/>
             </MenuItem>
         </Menu>

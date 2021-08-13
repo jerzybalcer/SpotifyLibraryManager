@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SpotifyLibraryManager.Models;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -14,6 +15,10 @@ namespace SpotifyLibraryManager
         public ToolBar()
         {
             InitializeComponent();
+            Albums.AlbumsLoadedChanged += () =>
+            {
+                ResetSortMenuChecks();
+            };
         }
 
         // Toggle between ascending and descending order indicator
@@ -39,6 +44,25 @@ namespace SpotifyLibraryManager
         {
             var win = Application.Current.MainWindow as MainWindow;
             win.ContentFrame.Navigate(new Uri("/Views/Pages/LoginPage.xaml", UriKind.Relative));
+        }
+
+        private void ResetSortMenuChecks()
+        {
+            foreach (MenuItem item in SortTopItem.Items)
+                item.IsChecked = false;
+
+            SortByAddedAt.IsChecked = true;
+        }
+
+        private void Sort_Checked(object sender, RoutedEventArgs e)
+        {
+            var checkedItem = sender as MenuItem;
+
+            foreach(MenuItem item in SortTopItem.Items)
+            {
+                if (item != checkedItem)
+                    item.IsChecked = false;
+            }
         }
     }
 }

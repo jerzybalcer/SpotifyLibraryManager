@@ -61,13 +61,7 @@
             <Grid>
                 <ContentPresenter
                         ContentSource="Header"
-                        RecognizesAccessKey="True">
-                    <ContentPresenter.ContentTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding}" Foreground="White" Padding="6,3,6,3"/>
-                        </DataTemplate>
-                    </ContentPresenter.ContentTemplate>
-                </ContentPresenter>
+                        RecognizesAccessKey="True" Margin="6,3,6,3"/>
                 <Popup x:Name="Popup"
              Placement="Bottom"
              IsOpen="{TemplateBinding IsSubmenuOpen}"
@@ -138,7 +132,7 @@
                         RecognizesAccessKey="True">
                     <ContentPresenter.ContentTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding}" Foreground="White" />
+                            <TextBlock Text="{Binding}" Foreground="White" Padding="1,2,1,2"/>
                         </DataTemplate>
                     </ContentPresenter.ContentTemplate>
                 </ContentPresenter>
@@ -152,6 +146,9 @@
              Value="true">
                 <Setter Property="Background"
               TargetName="Border" Value="#575757"/>
+            </Trigger>
+            <Trigger Property="IsChecked" Value="true">
+                <Setter Property="Background" TargetName="Border" Value="#FF1DB954"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
