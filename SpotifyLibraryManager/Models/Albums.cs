@@ -107,7 +107,8 @@ namespace SpotifyLibraryManager.Models
 
             foreach (var item in AllAlbums)
             {
-                if (item.Album.Name.ToLower().Contains(searchingFor.ToLower()) || item.Album.Artists[0].Name.ToLower().Contains(searchingFor.ToLower()))
+                if (item.Album.Name.ToLower().Contains(searchingFor.ToLower()) ||
+                    item.Album.Artists.Any(artist => artist.Name.ToLower().Contains(searchingFor.ToLower())))
                     AvailableAlbums.Add(item);
             }
         }
