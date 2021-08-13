@@ -24,7 +24,7 @@
         <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Center" x:Name="SortStackPanel">
             <Menu x:Name="SortMenu" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
                   VerticalAlignment="Center" Margin="0,0,0,0" IsEnabled="{Binding AreMenusEnabled}">
-                <MenuItem Header="Sort by" Margin="5,0,5,0" VerticalContentAlignment="Center" VerticalAlignment="Center">
+                <MenuItem Header="Sort by" Margin="5,0,5,0" VerticalContentAlignment="Center" VerticalAlignment="Center" Height="22">
                     <MenuItem Header="Name" x:Name="SortByName" Margin="5,0,5,0" Command="{Binding SortCommand}" CommandParameter="{Binding ElementName=SortByName, Path=Header}"/>
                     <MenuItem Header="Artist" x:Name="SortByArtist" Margin="5,0,5,0" Command="{Binding SortCommand}" CommandParameter="{Binding ElementName=SortByArtist, Path=Header}"/>
                     <MenuItem Header="Release Date" x:Name="SortByReleaseDate" Margin="5,0,5,0" Command="{Binding SortCommand}" CommandParameter="{Binding ElementName=SortByReleaseDate, Path=Header}"/>
@@ -42,7 +42,7 @@
 
         <!--Search Bar-->
         <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Center" x:Name="SearchStackPanel" Margin="30,0,30,0">
-            <TextBox Text="Search" VerticalContentAlignment="Center" Style="{StaticResource CustomTextBox}" x:Name="SearchText" Width="100" Height="25" 
+            <TextBox Text="Search" VerticalContentAlignment="Center" Style="{StaticResource CustomTextBox}" x:Name="SearchText" Width="100" Height="24" 
                      VerticalAlignment="Center" HorizontalAlignment="Right" Background="#383838" Foreground="White" 
                      GotKeyboardFocus="SearchText_GotKeyboardFocus" IsEnabled="{Binding AreMenusEnabled}" Cursor="IBeam"/>
             <Button x:Name="SearchBtn" Style="{StaticResource ToolBarButtonStyle}" Background="#383838" Foreground="White" Width="18" Height="18" IsDefault="True" 
@@ -55,7 +55,7 @@
         <!--User Menu-->
         <Menu x:Name="Menu" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" Grid.Column="3" 
               IsEnabled="{Binding AreMenusEnabled}">
-            <MenuItem Header="{Binding User.DisplayName}" Margin="5,0,5,0" x:Name="MenuUser" VerticalAlignment="Center" VerticalContentAlignment="Center">
+            <MenuItem Header="{Binding User.DisplayName}" Margin="5,0,5,0" x:Name="MenuUser" VerticalAlignment="Center" VerticalContentAlignment="Center" Height="22">
                 <MenuItem Header="Logout" x:Name="MenuLogout" Margin="5,0,5,0" Command="{Binding LogoutCommand}" Click="MenuLogout_Click"/>
             </MenuItem>
         </Menu>

@@ -36,13 +36,28 @@
 
             <!--Window Controls-->
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="2">
-                <Button Background="Transparent" Foreground="White" x:Name="MinimizeBtn" Click="MinimizeBtn_Click" Width="35" Height="35" Style="{StaticResource ToolBarButtonStyle}">
-                    <Line Stroke="White" StrokeThickness="2" X1="0" X2="10" Y1="10" Y2="10" UseLayoutRounding="True" SnapsToDevicePixels="True" />
+                <Button Background="Transparent" Foreground="White" x:Name="MinimizeBtn" Click="MinimizeBtn_Click" Width="35" 
+                        Height="35" Style="{StaticResource ToolBarButtonStyle}">
+                    <Line Stroke="White" StrokeThickness="2" X1="0" X2="10" Y1="10" Y2="10" UseLayoutRounding="True" 
+                          SnapsToDevicePixels="True" />
                 </Button>
                 <Button Background="Transparent" Foreground="White" x:Name="FullScreenBtn" Click="FullScreenBtn_Click" Width="35" Height="35" Style="{StaticResource ToolBarButtonStyle}">
-                    <Rectangle Stroke="White" Fill="Transparent" StrokeThickness="2" Width="12" Height="12" HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="True" SnapsToDevicePixels="True" />
+                    <Rectangle Stroke="White" Fill="Transparent" StrokeThickness="2" Width="12" Height="12" HorizontalAlignment="Center" 
+                               VerticalAlignment="Center" UseLayoutRounding="True" SnapsToDevicePixels="True" />
                 </Button>
-                <Button Content="✖" Background="Transparent" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="White" x:Name="CloseBtn" Click="CloseBtn_Click" Width="35" Height="35" UseLayoutRounding="True" SnapsToDevicePixels="True" Style="{StaticResource ToolBarButtonStyle}"/>
+                <Button Background="Transparent" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" 
+                        Foreground="White" x:Name="CloseBtn" Click="CloseBtn_Click" Width="35" Height="35" UseLayoutRounding="True" 
+                        SnapsToDevicePixels="True" Style="{StaticResource ToolBarButtonStyle}">
+                    <Button.Content>
+                        <TextBlock Text="✖" RenderTransformOrigin="0.5,0.5">
+                            <TextBlock.RenderTransform>
+                                <TransformGroup>
+                                    <TranslateTransform Y="-1"/>
+                                </TransformGroup>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                    </Button.Content>
+                </Button>
             </StackPanel>
         </Grid>
 
