@@ -25,6 +25,9 @@
                             <Setter Property="Opacity" TargetName="border" Value="0.5"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" TargetName="PART_ContentHost" Value="0.5"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Background" TargetName="border" Value="#141414"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">

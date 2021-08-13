@@ -1,6 +1,7 @@
 ﻿using SpotifyAPI.Web;
 using SpotifyLibraryManager.Helpers;
 using SpotifyLibraryManager.Models;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -34,6 +35,7 @@ namespace SpotifyLibraryManager.ViewModels
         public RelayCommand SortCommand { get; private set; }
         public RelayCommand ChangeSortDirectionCommand { get; private set; }
         public RelayCommand SearchCommand { get; private set; }
+        public RelayCommand RefreshCommand { get; private set; }
         public RelayCommand LogoutCommand { get; private set; }
 
         private void SortAlbums(object obj)
@@ -48,19 +50,13 @@ namespace SpotifyLibraryManager.ViewModels
         {
             Albums.Search(obj as string);
         }
+        private void RefreshAlbums(object obj)
+        {
+            Albums.DownloadAllAlbums();
+        }
         private void Logout(object obj)
         {
             Spotify.Instance.Logout();
-        }
-        private bool CanManipulateAlbums(object obj)
-        {
-            if (!Albums.AreAlbumsLoaded) return false;
-            else return true;
-        }
-        private bool CanLogout(object obj)
-        {
-            if (Spotify.Client == null || !Albums.AreAlbumsLoaded) return false;
-            else return true;
         }
         public ToolBarViewModel()
         {
@@ -70,10 +66,15 @@ namespace SpotifyLibraryManager.ViewModels
                 ToggleMenusAvailability();
             };
 
-            SortCommand = new RelayCommand(SortAlbums, CanManipulateAlbums);
-            ChangeSortDirectionCommand = new RelayCommand(ChangeSortDirection, CanManipulateAlbums);
-            SearchCommand = new RelayCommand(SearchAlbums, CanManipulateAlbums);
-            LogoutCommand = new RelayCommand(Logout, CanLogout);
+            Albums.AlbumsLoadedChanged += () => {
+                ToggleMenusAvailability();
+            };
+
+            SortCommand = new RelayCommand(SortAlbums, null);
+            ChangeSortDirectionCommand = new RelayCommand(ChangeSortDirection, null);
+            SearchCommand = new RelayCommand(SearchAlbums, null);
+            LogoutCommand = new RelayCommand(Logout, null);
+            RefreshCommand = new RelayCommand(RefreshAlbums, null);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -12,11 +12,18 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        
+        <!--Refresh albums-->
+        <Button Content="Refresh" Foreground="White" Grid.Column="0" Style="{StaticResource ToolBarButtonStyle}"
+                 Margin="0,0,30,0" Padding="10,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center" Height="22" 
+                Command="{Binding RefreshCommand}" IsEnabled="{Binding AreMenusEnabled}"/>
 
         <!--Sort Menu-->
-        <StackPanel Orientation="Horizontal" Grid.Column="0" VerticalAlignment="Center" x:Name="SortStackPanel">
-            <Menu x:Name="SortMenu" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" IsEnabled="{Binding AreMenusEnabled}">
+        <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Center" x:Name="SortStackPanel">
+            <Menu x:Name="SortMenu" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" 
+                  VerticalAlignment="Center" Margin="0,0,0,0" IsEnabled="{Binding AreMenusEnabled}">
                 <MenuItem Header="Sort by" Margin="5,0,5,0" VerticalContentAlignment="Center" VerticalAlignment="Center">
                     <MenuItem Header="Name" x:Name="SortByName" Margin="5,0,5,0" Command="{Binding SortCommand}" CommandParameter="{Binding ElementName=SortByName, Path=Header}"/>
                     <MenuItem Header="Artist" x:Name="SortByArtist" Margin="5,0,5,0" Command="{Binding SortCommand}" CommandParameter="{Binding ElementName=SortByArtist, Path=Header}"/>
@@ -27,23 +34,27 @@
                 </MenuItem>
             </Menu>
             <Button Style="{StaticResource ToolBarButtonStyle}"  Background="#383838" Foreground="White" Width="18" Height="18" 
-                    x:Name="SortDirectionChanger" Click="SortDirectionChanger_Click" Command="{Binding ChangeSortDirectionCommand}">
+                    x:Name="SortDirectionChanger" Click="SortDirectionChanger_Click" Command="{Binding ChangeSortDirectionCommand}"
+                    IsEnabled="{Binding AreMenusEnabled}">
                 <TextBlock x:Name="SortDirection" Text="⋁" VerticalAlignment="Center"/>
             </Button>
         </StackPanel>
 
         <!--Search Bar-->
-        <StackPanel Orientation="Horizontal" Grid.Column="1" VerticalAlignment="Center" x:Name="SearchStackPanel" Margin="30,0,30,0">
-            <TextBox Text="Search" VerticalContentAlignment="Center" Style="{DynamicResource CustomTextBox}" x:Name="SearchText" Width="100" Height="25" 
-                     VerticalAlignment="Center" HorizontalAlignment="Right" Background="#383838" Foreground="White" GotKeyboardFocus="SearchText_GotKeyboardFocus" IsEnabled="{Binding AreMenusEnabled}"/>
+        <StackPanel Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Center" x:Name="SearchStackPanel" Margin="30,0,30,0">
+            <TextBox Text="Search" VerticalContentAlignment="Center" Style="{StaticResource CustomTextBox}" x:Name="SearchText" Width="100" Height="25" 
+                     VerticalAlignment="Center" HorizontalAlignment="Right" Background="#383838" Foreground="White" 
+                     GotKeyboardFocus="SearchText_GotKeyboardFocus" IsEnabled="{Binding AreMenusEnabled}" Cursor="IBeam"/>
             <Button x:Name="SearchBtn" Style="{StaticResource ToolBarButtonStyle}" Background="#383838" Foreground="White" Width="18" Height="18" IsDefault="True" 
-                    Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=SearchText, Path=Text}" Click="SearchBtn_Click">
+                    Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=SearchText, Path=Text}" Click="SearchBtn_Click"
+                    IsEnabled="{Binding AreMenusEnabled}">
                 <TextBlock Text="🔎︎" VerticalAlignment="Center"/>
             </Button>
         </StackPanel>
 
         <!--User Menu-->
-        <Menu x:Name="Menu" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" Grid.Column="2" IsEnabled="{Binding AreMenusEnabled}">
+        <Menu x:Name="Menu" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" Grid.Column="3" 
+              IsEnabled="{Binding AreMenusEnabled}">
             <MenuItem Header="{Binding User.DisplayName}" Margin="5,0,5,0" x:Name="MenuUser" VerticalAlignment="Center" VerticalContentAlignment="Center">
                 <MenuItem Header="Logout" x:Name="MenuLogout" Margin="5,0,5,0" Command="{Binding LogoutCommand}" Click="MenuLogout_Click"/>
             </MenuItem>

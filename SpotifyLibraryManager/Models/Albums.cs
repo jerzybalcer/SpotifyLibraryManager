@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SpotifyLibraryManager.Models
 {
+    public delegate void AlbumsLoadedChangedHandler();
     public static class Albums
     {
         private static bool _sortAscending = false;
@@ -18,14 +19,19 @@ namespace SpotifyLibraryManager.Models
             get { return _sortBy; }
             set { _sortBy = value; }
         }
-        public static bool AreAlbumsLoaded { get; private set; } = false;
+
+        public static event AlbumsLoadedChangedHandler AlbumsLoadedChanged;
+        public static void OnAlbumsLoadedChanged()
+        {
+            AlbumsLoadedChanged?.Invoke();
+        }
         private static List<SavedAlbum> AllAlbums { get; set; } = new List<SavedAlbum>();
         public static ObservableCollection<SavedAlbum> AvailableAlbums { get; set; } = new ObservableCollection<SavedAlbum>();
 
         public static async Task DownloadAllAlbums()
         {
             AvailableAlbums.Clear();
-            AreAlbumsLoaded = false;
+            OnAlbumsLoadedChanged();
 
             while (AvailableAlbums.Count < _total)
             {
@@ -39,7 +45,7 @@ namespace SpotifyLibraryManager.Models
                 }
             }
             AllAlbums = AvailableAlbums.ToList();
-            AreAlbumsLoaded = true;
+            OnAlbumsLoadedChanged();
         }
 
         private static async Task Paginate()
@@ -107,7 +113,6 @@ namespace SpotifyLibraryManager.Models
         }
         public static void ClearOnLogout()
         {
-            AreAlbumsLoaded = false;
             AvailableAlbums.Clear();
             AllAlbums.Clear();
             _total = 51;
