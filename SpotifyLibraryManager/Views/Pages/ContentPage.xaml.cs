@@ -24,5 +24,13 @@ namespace SpotifyLibraryManager
         {
             InitializeComponent();
         }
+
+        private void Title_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var txt = sender as TextBlock;
+
+            if (txt.Text.Length == 0) OpenWithSpotifyBtn.Visibility = Visibility.Collapsed;
+            else OpenWithSpotifyBtn.Visibility = Visibility.Visible;
+        }
     }
 }

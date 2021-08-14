@@ -14,6 +14,7 @@
                 <ResourceDictionary Source="/ResourceDictionaries/CustomTextBox.xaml"/>
                 <ResourceDictionary Source="/ResourceDictionaries/ToolBarButtonStyle.xaml"/>
                 <ResourceDictionary Source="/ResourceDictionaries/AlbumCoverButtonStyle.xaml"/>
+                <ResourceDictionary Source="/ResourceDictionaries/GreenRoundButtonStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

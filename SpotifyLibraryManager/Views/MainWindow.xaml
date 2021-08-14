@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SpotifyLibraryManager"
         xmlns:vm="clr-namespace:SpotifyLibraryManager.ViewModels"
         mc:Ignorable="d"
-        Title="Spotify Library Manager" Height="576" Width="1024" Background="#000000" WindowStyle="None" ResizeMode="NoResize"
+        Title="Spotify Library Manager" Height="720" Width="1280" Background="#000000" WindowStyle="None" ResizeMode="NoResize"
         AllowsTransparency="True">
 
     <Window.Resources>

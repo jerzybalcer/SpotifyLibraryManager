@@ -4,6 +4,7 @@ using SpotifyLibraryManager.Models;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 
@@ -19,6 +20,8 @@ namespace SpotifyLibraryManager.ViewModels
         private string _selectedReleaseDate;
         private string _selectedAddedAt;
         private string _selectedTotalTracks;
+        private string _selectedDuration;
+        private string _selectedUri;
         public string SelectedTitle
         {
             get { return _selectedTitle; }
@@ -35,13 +38,7 @@ namespace SpotifyLibraryManager.ViewModels
                 if (_selectedReleaseDate == null) return "";
                 else
                 {
-                    CultureInfo lang = new("en-US");
-
-                    if (DateTime.TryParse(_selectedReleaseDate, out DateTime parsedReleaseDate))
-                    {
-                        return "Released at " + parsedReleaseDate.ToString(lang.DateTimeFormat.LongDatePattern, lang);
-                    }
-                    else { return "Released in " + _selectedReleaseDate; }
+                    return TimeToStringConverter.ToLongDateString(_selectedReleaseDate, "Released");
                 }
             }
             set { _selectedReleaseDate = value; OnPropertyChanged(); }
@@ -52,9 +49,7 @@ namespace SpotifyLibraryManager.ViewModels
                 if (_selectedAddedAt == null) return "";
                 else
                 {
-                    CultureInfo lang = new("en-US");
-
-                    return "Added at " + DateTime.Parse(_selectedAddedAt).Date.ToString(lang.DateTimeFormat.LongDatePattern, lang);
+                    return TimeToStringConverter.ToLongDateString(_selectedAddedAt, "Added");
                 }
             }
             set { _selectedAddedAt = value; OnPropertyChanged(); }
@@ -66,6 +61,15 @@ namespace SpotifyLibraryManager.ViewModels
                 else return _selectedTotalTracks + " tracks"; }
             set { _selectedTotalTracks = value; OnPropertyChanged(); }
         }
+        public string SelectedDuration
+        {
+            get
+            {
+                if (_selectedDuration == null) return "";
+                else return ", " + _selectedDuration;
+            }
+            set { _selectedDuration = value; OnPropertyChanged(); }
+        }
 
         public RelayCommand SelectAlbumCommand { get; private set; }
         private void SelectAlbum(object obj)
@@ -76,15 +80,36 @@ namespace SpotifyLibraryManager.ViewModels
             SelectedReleaseDate = selectedAlbum.Album.ReleaseDate;
             SelectedAddedAt = selectedAlbum.AddedAt.ToString();
             SelectedTotalTracks = selectedAlbum.Album.TotalTracks.ToString();
+            _selectedUri = selectedAlbum.Album.Uri;
 
+            int duration = 0;
             SelectedTracks.Clear();
             foreach (var track in selectedAlbum.Album.Tracks.Items)
+            {
+                duration += track.DurationMs;
                 SelectedTracks.Add(track);
+            }
+            SelectedDuration = TimeToStringConverter.FromMiliseconds(duration);
+        }
+        public RelayCommand OpenWithSpotifyCommand { get; private set; }
+        private void OpenWithSpotify(object obj)
+        {
+            try
+            {
+                Process.Start("spotify", "--uri=" + _selectedUri);
+            }
+            catch {
+                var browser = new Process();
+                browser.StartInfo.UseShellExecute = true;
+                browser.StartInfo.FileName = "https://www.spotify.com/us/download/other/";
+                browser.Start(); 
+            }
         }
 
         public ContentViewModel()
         {
             SelectAlbumCommand = new RelayCommand(SelectAlbum, null);
+            OpenWithSpotifyCommand = new RelayCommand(OpenWithSpotify, null);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
